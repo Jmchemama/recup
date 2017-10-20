@@ -47,8 +47,8 @@ public class CommerciauxServlet extends HttpServlet {
 		} else {
 			Object session = request.getSession().getAttribute("user");
 			Commercial user = (Commercial) session;
-			request.setAttribute("msgPasAutorise","Vous n'avez pas l'autorisation");
-			response.sendRedirect("commercial?noCommercial=" +user.getNoCommercial());
+			request.setAttribute("msgPasAutorise", "Vous n'avez pas l'autorisation");
+			response.sendRedirect("commercial?noCommercial=" + user.getNoCommercial());
 		}
 
 	}
@@ -56,6 +56,11 @@ public class CommerciauxServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			  throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+			if ("deconnecter".equals(request.getParameter("action"))) {
+				// Oublier le user
+				session.removeAttribute("user");
+				response.sendRedirect("connexion");
+			}
 	}
-
 }

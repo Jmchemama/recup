@@ -15,6 +15,13 @@
 				<h1 class="text-center" >Bienvenue dans votre espace commercial</h1>
 			</div>
 		</div>
+		<c:if test="${sessionScope['user'] != null}">
+			<form action="connexionCommercial" method="POST">
+				<button class="btn btn-warning" name="action" value="deconnecter">
+					DECONNEXION
+				</button>
+			</form>
+		</c:if>
 		<br>
 		<br>
 		<c:if test="${msgPasAutorise != null}">

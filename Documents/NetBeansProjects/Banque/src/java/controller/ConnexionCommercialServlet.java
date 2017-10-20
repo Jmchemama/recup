@@ -21,14 +21,12 @@ import model.Commercial;
  *
  * @author jmche
  */
-@WebServlet(name = "ConnexionCommercialServlet", urlPatterns = {"/ConnexionCommercialServlet"})
+@WebServlet(name = "ConnexionCommercialServlet", urlPatterns = {"/connexionCommercial"})
 public class ConnexionCommercialServlet extends HttpServlet {
-	
+
 	private static final String VUE_FORM = "WEB-INF/connexion.jsp";
 	private static final String VUE_OK = "commercial";
-	boolean estOk = false;
-	int noCommercial = 0;
-	
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			  throws ServletException, IOException {
@@ -38,6 +36,8 @@ public class ConnexionCommercialServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			  throws ServletException, IOException {
+		boolean estOk = false;
+		int noCommercial = 0;
 		String vue = VUE_FORM; // soyons pessimistes :-)
 		try {
 			// Recuperer la session http
@@ -64,8 +64,8 @@ public class ConnexionCommercialServlet extends HttpServlet {
 						//Ajouter le user à la session
 						session.setAttribute("user", user);
 						vue = VUE_OK;
-						estOk=true;
-						noCommercial=user.getNoCommercial();
+						estOk = true;
+						noCommercial = user.getNoCommercial();
 					} else {
 						request.setAttribute("connexionMsg", "Email ou Mot de passe incorrect");
 					}
@@ -75,13 +75,11 @@ public class ConnexionCommercialServlet extends HttpServlet {
 			Logger.getLogger(ConnexionCommercialServlet.class.getName()).log(Level.SEVERE, null, ex);
 			request.setAttribute("connexionMsg", ex.getMessage());
 		}
-		if(estOk){
-			response.sendRedirect(vue+"?noCommercial="+noCommercial);
-		}
-		else{
+		if (estOk) {
+			response.sendRedirect(vue + "?noCommercial=" + noCommercial);
+		} else {
 			request.getRequestDispatcher(vue).forward(request, response);
 		}
-		
+
 	}
 }
-
