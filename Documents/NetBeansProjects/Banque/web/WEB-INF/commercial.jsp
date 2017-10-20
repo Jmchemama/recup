@@ -17,7 +17,12 @@
 		</div>
 		<br>
 		<br>
-		
+		<c:if test="${msgPasAutorise != null}">
+			<div class="alert alert-danger" role="alert">
+				${msgPasAutorise}
+			</div>
+		</c:if>
+		<br>
 		<h2>Liste des commerciaux :</h2>
 		<table class="table table-striped" >
 			<thead>

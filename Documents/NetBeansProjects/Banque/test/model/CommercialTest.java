@@ -23,7 +23,7 @@ public class CommercialTest {
 
 	@Test
 	public void testConstructeurCommercial() {
-		Commercial commercial = new Commercial(1,"nom");
+		Commercial commercial = new Commercial(1,"nom", null, null);
 		assertEquals(1,commercial.getNoCommercial());
 		assertEquals("nom",commercial.getNom());
 	}
@@ -56,5 +56,24 @@ public class CommercialTest {
 		expected.add(c2);
 		expected.add(c3);
 		assertEquals(expected,getListCommercial());
+	}
+	
+	
+	@Test public void testGetByEmailMdp() throws SQLException{
+		Commercial expected = new Commercial(1, "Lampion", "lampion@mondass.com", "anatole" );
+		Commercial result = Commercial.getByEmailMpd("lampion@mondass.com", "anatole");
+		assertEquals(expected, result);
+	}
+	
+	@Test public void testGetByEmailMdpEchecEmail() throws SQLException{
+		Commercial expected = null;
+		Commercial result = Commercial.getByEmailMpd("lanpion@mondass.com", "anatole");
+		assertEquals(expected, result);
+	}
+	
+	@Test public void testGetByEmailMdpEchecMdp() throws SQLException{
+		Commercial expected = null;
+		Commercial result = Commercial.getByEmailMpd("lampion@mondass.com", "amatole");
+		assertEquals(expected, result);
 	}
 }

@@ -16,15 +16,26 @@ import java.util.Objects;
 /**
  *
  * @author jmche
- */
-public class Commercial {
+ */public class Commercial {
+
+	public String getEmail() {
+		return email;
+	}
 
 	private int noCommercial;
 	private String nom;
+	private String email;
+	private String mdp;
 
-	public Commercial(int noCommercial, String nom) {
+	public String getMdp() {
+		return mdp;
+	}
+
+	public Commercial(int noCommercial, String nom, String email, String mdp) {
 		this.noCommercial = noCommercial;
 		this.nom = nom;
+		this.email = email;
+		this.mdp = mdp;
 	}
 
 	public int getNoCommercial() {
@@ -43,7 +54,9 @@ public class Commercial {
 		ResultSet rs = ordre.executeQuery(sql);
 		if (rs.next()) {
 			result = new Commercial(rs.getInt("no_commercial"),
-					  rs.getString("nom"));
+					  rs.getString("nom"),
+					  rs.getString("email"),
+					  rs.getString("mdp"));
 			rs.close();
 			ordre.close();
 			connexion.close();
@@ -72,7 +85,25 @@ public class Commercial {
 		connexion.close();
 		return listClient;
 	}
-
+	
+	public static Commercial getByEmailMpd(String email, String mdp) throws SQLException{
+		Commercial result = null;
+		Connection connexion = Database.getConnection();
+		Statement ordre = connexion.createStatement();
+		String sql = " SELECT * FROM commercial WHERE email = '"+email+"' AND mdp = '"+mdp+"';";
+		ResultSet rs = ordre.executeQuery(sql);
+		if (rs.next()) {
+			result = new Commercial(rs.getInt("no_commercial"),
+					  rs.getString("nom"),
+					  rs.getString("email"),
+					  rs.getString("mdp"));
+			rs.close();
+			ordre.close();
+			connexion.close();
+		}
+		return result;
+	}
+	
 	public static ArrayList<Commercial> getListCommercial() throws SQLException {
 		ArrayList<Commercial> listCommercial = new ArrayList();
 		Commercial result = null;
@@ -83,7 +114,9 @@ public class Commercial {
 		ResultSet rs = ordre.executeQuery(sql);
 		while (rs.next()) {
 			result = new Commercial(rs.getInt("no_commercial"),
-					  rs.getString("nom"));
+					  rs.getString("nom"),
+					  rs.getString("email"),
+					  rs.getString("mdp"));
 			listCommercial.add(result);
 		}
 		rs.close();
