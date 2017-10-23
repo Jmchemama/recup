@@ -21,10 +21,16 @@ public class Client {
 	private String nom;
 	private String email;
 
-	public Client(int noClient, String nom, String email) {
+	public String getMdp() {
+		return mdp;
+	}
+	private String mdp;
+
+	public Client(int noClient, String nom, String email, String mdp) {
 		this.noClient = noClient;
 		this.nom = nom;
 		this.email = email;
+		this.mdp = mdp;
 	}
 
 	@Override
@@ -69,14 +75,33 @@ public class Client {
 		if (rs.next()) {
 			result = new Client(rs.getInt("no_client"),
 					  rs.getString("nom"),
-					  rs.getString("email"));
+					  rs.getString("email"), 
+					  rs.getString("mdp"));
 			rs.close();
 			ordre.close();
 			connexion.close();
 		}
 		return result;
 	}
-
+	
+	public static Client getByEmailMpd(String email, String mdp) throws SQLException{
+		Client result = null;
+		Connection connexion = Database.getConnection();
+		Statement ordre = connexion.createStatement();
+		String sql = " SELECT * FROM client WHERE email = '"+email+"' AND mdp = '"+mdp+"';";
+		ResultSet rs = ordre.executeQuery(sql);
+		if (rs.next()) {
+			result = new Client(rs.getInt("no_client"),
+					  rs.getString("nom"),
+					  rs.getString("email"),
+					  rs.getString("mdp"));
+			rs.close();
+			ordre.close();
+			connexion.close();
+		}
+		return result;
+	}
+	
 	public int getNoClient() {
 		return noClient;
 	}

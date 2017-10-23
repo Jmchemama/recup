@@ -28,7 +28,7 @@ public class manipTest {
 	
 	@Test (expected = ClassCastException.class)
 	public void testTranstypageException(){
-		Client client = new Client(1," nom","email ");
+		Client client = new Client(1," nom","email ", null);
 		Object instance = client;
 		Commercial result = (Commercial) instance;
 	}

@@ -29,14 +29,21 @@
 							<input type="password" class="form-control-plaintext" id="inputPassword"  type="password" name="pwd"> ${pwdMsg}
 						</div>
 					</div>
+					<div class="form-group">
+					<label>Type de connexion</label>
+					<select class="form-control-plaintext" id="role" name="role">
+							<option value="client">Client</option>
+							<option value="commercial">Commercial</option>
+					</select>
+				</div>
 					<button class="btn btn-warning" name="action" type="submit">
-						CONNEXION ${sessionScope["user"].getLogin()}
+						CONNEXION ${sessionScope["user"].getEmail()}
 					</button>
 					${connexionMsg}
 				</c:if>
 				<c:if test="${sessionScope['user'] != null}">
 					<button class="btn btn-warning" name="action" value="deconnecter">
-						DECONNEXION ${sessionScope["user"].getLogin()}
+						DECONNEXION ${sessionScope["user"].getEmail()}
 					</button>
 				</c:if>
 			</div>

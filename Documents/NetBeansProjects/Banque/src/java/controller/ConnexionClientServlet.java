@@ -15,17 +15,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Client;
 import model.Commercial;
 
 /**
  *
  * @author jmche
  */
-@WebServlet(name = "ConnexionCommercialServlet", urlPatterns = {"/connexionCommercial"})
-public class ConnexionCommercialServlet extends HttpServlet {
+@WebServlet(name = "ConnexionClientServlet", urlPatterns = {"/clientConnexion"})
+public class ConnexionClientServlet extends HttpServlet {
 
-	private static final String VUE_FORM = "WEB-INF/connexion.jsp";
-	private static final String VUE_OK = "commercial";
+	private static final String VUE_FORM = "WEB-INF/clientConnexion.jsp";
+	private static final String VUE_OK = "comptes";
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,14 +38,14 @@ public class ConnexionCommercialServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			  throws ServletException, IOException {
 		boolean estOk = false;
-		int noCommercial = 0;
+		int noClient = 0;
 		String vue = VUE_FORM; // soyons pessimistes :-)
 		try {
 			// Recuperer la session http
 			HttpSession session = request.getSession(true);
 			if ("deconnecter".equals(request.getParameter("action"))) {
 				// Oublier le user
-				session.removeAttribute("user");
+				session.removeAttribute("client");
 				vue = VUE_FORM;
 			} else {
 				boolean isValid = true;
@@ -59,24 +60,24 @@ public class ConnexionCommercialServlet extends HttpServlet {
 					request.setAttribute("pwdMsg", "Mot de passe obligatoire");
 				}
 				if (isValid) {
-					Commercial user = Commercial.getByEmailMpd(login, pwd);
+					Client user = Client.getByEmailMpd(login, pwd);
 					if (user != null) {
 						//Ajouter le user à la session
-						session.setAttribute("user", user);
+						session.setAttribute("client", user);
 						vue = VUE_OK;
 						estOk = true;
-						noCommercial = user.getNoCommercial();
+						noClient = user.getNoClient();
 					} else {
 						request.setAttribute("connexionMsg", "Email ou Mot de passe incorrect");
 					}
 				}
 			}
 		} catch (SQLException ex) {
-			Logger.getLogger(ConnexionCommercialServlet.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(ConnexionServlet.class.getName()).log(Level.SEVERE, null, ex);
 			request.setAttribute("connexionMsg", ex.getMessage());
 		}
 		if (estOk) {
-			response.sendRedirect(vue + "?noCommercial=" + noCommercial);
+			response.sendRedirect(vue + "?noClient=" + noClient);
 		} else {
 			request.getRequestDispatcher(vue).forward(request, response);
 		}

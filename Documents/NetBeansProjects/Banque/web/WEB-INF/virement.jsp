@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="p" tagdir="/WEB-INF/tags/"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,6 +8,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	</head>
 	<body class="container">
+		   <p:header></p:header>
 		<input type="hidden" name="noClient" value="${noClient}"/>
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">

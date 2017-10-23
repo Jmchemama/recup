@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="p" tagdir="/WEB-INF/tags/"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,6 +9,7 @@
 		<title>Créer un compte pour le client ${noClient}</title>
 	</head>
 	<body class="container">
+		   <p:header></p:header>
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
 				<h1 class="text-center" >Espace création de compte</h1>

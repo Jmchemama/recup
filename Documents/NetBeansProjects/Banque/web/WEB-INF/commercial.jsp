@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="p" tagdir="/WEB-INF/tags/"%>
 
 <!DOCTYPE html>
 <html>
@@ -9,19 +10,13 @@
 		<title></title>
 	</head>
 	<body class="container">
+		<p:header></p:header>
 		<input type="hidden" name="noCommercial" value="${noCommercial}"/>
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
 				<h1 class="text-center" >Bienvenue dans votre espace commercial</h1>
 			</div>
 		</div>
-		<c:if test="${sessionScope['user'] != null}">
-			<form action="connexionCommercial" method="POST">
-				<button class="btn btn-warning" name="action" value="deconnecter">
-					DECONNEXION
-				</button>
-			</form>
-		</c:if>
 		<br>
 		<br>
 		<c:if test="${msgPasAutorise != null}">

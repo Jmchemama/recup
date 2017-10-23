@@ -77,7 +77,7 @@ import java.util.Objects;
 		while (rs.next()) {
 			result = new Client(rs.getInt("no_client"),
 					  rs.getString("nom"),
-					  rs.getString("email"));
+					  rs.getString("email"), null);
 			listClient.add(result);
 		}
 		rs.close();

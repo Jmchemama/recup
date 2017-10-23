@@ -19,7 +19,7 @@ import model.Compte;
  *
  * @author jmche
  */
-@WebServlet(name = "VirementServlet", urlPatterns = {"/Virement"})
+@WebServlet(name = "VirementServlet", urlPatterns = {"/virement"})
 public class VirementServlet extends HttpServlet {
 
 	@Override
