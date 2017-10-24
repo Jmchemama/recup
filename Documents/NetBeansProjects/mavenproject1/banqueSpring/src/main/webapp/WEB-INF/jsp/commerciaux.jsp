@@ -1,6 +1,6 @@
 <%-- 
-    Document   : comptes
-    Created on : 24 oct. 2017, 10:14:19
+    Document   : commerciaux
+    Created on : 24 oct. 2017, 10:44:00
     Author     : jmche
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -15,34 +15,28 @@
 	<body class="container">
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
-				<h1 class="text-center" >ESPACE COMPTES CLIENT</h1>
+				<h1 class="text-center" >LISTE DES COMMERCIAUX</h1>
 			</div>
 		</div>
-		<c:if test="${sessionScope['commercial'] != null} || ${sessionScope['client'] != null }">
-			<form action="connexionCommercial" method="POST">
-				<button class="btn btn-warning" name="action" value="deconnecter">
-					DECONNEXION
-				</button>
-			</form>
-		</c:if>
-		<h2 class="text-center">Comptes du client ${noClient}</h2>
 		<br>
 		<br>
+		<h2>Liste des commerciaux :</h2>
 		<table class="table table-striped" >
 			<thead>
 				<tr>	
-					<th>Numéros du compte</th>
-					<th>Solde du compte</th>
+					<th>Numéros du commercial</th>
+					<th>nom</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${comptes}" var="compte">
-					<tr>
-						<th>${compte.noCompte}</th>
-						<th>${compte.solde}</th>
-					</tr>
-				</c:forEach>
-			</tbody>		
-		</table>
-	</body>
+			<c:forEach items="${commerciaux}" var="commercial">
+				<tr>
+					<th>${commercial.getNoCommercial()} </th>
+					<th>${commercial.getNom()}</th>
+					<th><button  class="btn btn-primary" >Envoyer un mail</button></th>
+				</tr>
+			</c:forEach>
+		</tbody>		
+	</table>
+</body>
 </html>
