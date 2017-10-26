@@ -15,17 +15,22 @@ import java.util.Objects;
  *
  * @author jmche
  */
-public class Client {
+public class Client extends User {
 
 	private int noClient;
 	private String nom;
 	private String email;
-
+	private String mdp;
+	
 	public String getMdp() {
 		return mdp;
 	}
-	private String mdp;
-
+	
+	
+	public Client(){
+		
+	}
+	
 	public Client(int noClient, String nom, String email, String mdp) {
 		this.noClient = noClient;
 		this.nom = nom;

@@ -38,8 +38,9 @@ public class CreerCompteController {
 	) throws SQLException {
 		if (!result.hasErrors()) {
 			compte.inserer2();
+			return "redirect:/client-" + noClient + "/comptes";
 		}
-		return "redirect:/client-" + noClient + "/comptes";
+		return "creerCompte";
 	}
 
 }
